@@ -117,7 +117,10 @@ int List::DeleteItem(itemType target) {
   int res;
   node* cur = FindPtrTo(target, head);
   while( cur != nullptr ) {
-    node* newnext = cur->next->next;
+    node* newnext = nullptr;
+    if(cur->next->next != nullptr)
+      newnext = cur->next->next;
+
     delete cur->next;
     cur->next = newnext;
     length--;
@@ -129,19 +132,26 @@ int List::DeleteItem(itemType target) {
 
 void List::InsertItem(int pos, itemType itemIn) {
   node* cur = head;
+  if(pos == 0) {
+    PutItemH(itemIn);
+    return;
+  }
   while(pos > 1) {
     cur = cur->next;
     pos--;
   }
   node* tmp = cur->next;
   cur->next = new node{itemIn, tmp};
+  length++;
 }
 
 
 node* List::FindPtrTo(itemType t, node* offset) {
   node* cur = offset;
-  while(cur != nullptr || cur->item != t) {
+  while(cur->next != nullptr) {
+    if(cur->next->item == t) return cur;
     cur = cur->next;
   }
+  if(cur->next == nullptr) return nullptr;
   return cur;
 }

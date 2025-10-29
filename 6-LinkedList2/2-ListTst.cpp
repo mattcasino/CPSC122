@@ -51,7 +51,26 @@ int main()
  cout << "Testing IsEmpty and GetLength\n";
  cout << "Output should be 0, then 5\n";
  cout << lst1.IsEmpty() << " " << copied.GetLength() << '\n';
+  
 
+ lst1.PutItemT(4);
+ lst1.PutItemT(4);
+ cout << "Testing Find\n";
+ cout << "Output should be 2\n";
+ lst1.Print();
+ cout << "Has " << lst1.Find(4) << " instances of the number 4\n";
+
+ cout << "Testing DeleteItem\n";
+ cout << "Correct if output is 4, 3, 2, 1, 0, 4, 4 on subsequent lines, then 3, 2, 1, 0" << endl;
+ lst1.Print();
+ lst1.DeleteItem(4);
+ cout << '\n';
+ lst1.Print();
  cout << endl;
+
+ cout << "Testing InsertItem\n";
+ cout << "Correct if output is 3, 2, 6, 1, 0" << endl;
+ lst1.InsertItem(2, 6);
+ lst1.Print();
  return 0;
 }
